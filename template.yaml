@@ -1,30 +1,33 @@
-apiVersion: backstage.io/v1alpha1
+# Notice the v1beta2 version
+apiVersion: backstage.io/v1beta2
 kind: Template
+# some metadata about the template itself
 metadata:
-  name: docs-template
-  title: Documentation Template For You
-  description: Create a new standalone documentation project for you
-  tags:
-    - recommended
-    - techdocs
-    - mkdocs
+  name: e.dev
+  title: e.dev host
+  description: creates an *.e.dev 
 spec:
   owner: backstage/techdocs-core
-  templater: cookiecutter
-  type: documentation
-  path: '.'
+  type: Resource
 
-  schema:
-    required:
-      - component_id
-      - description
-    properties:
-      component_id:
-        title: Name
-        type: string
-        pattern: ^[a-z0-9A-Z_.-]{1,63}$
-        description: Unique name of the component
-      description:
-        title: Description
-        type: string
-        description: Help others understand what these docs are about.
+  # these are the steps which are rendered in the frontend with the form input
+  parameters:
+    - title: Domain Name
+      required:
+        - name
+      properties:
+        name:
+          title: Name
+          type: string
+          description: a unique name to launch your api => example.ethio.dev
+          ui:autofocus: true
+          ui:options:
+            rows: 5
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group
