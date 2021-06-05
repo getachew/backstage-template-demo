@@ -8,7 +8,7 @@ metadata:
   description: scaffolder v1beta2 template demo
 spec:
   owner: backstage/techdocs-core
-  type: resource
+  type: Resource
 
   # these are the steps which are rendered in the frontend with the form input
   parameters:
