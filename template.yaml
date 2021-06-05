@@ -5,6 +5,14 @@ metadata:
   title: Test Action template
   description: scaffolder v1beta2 template demo
 spec:
+  steps:
+    - id: fetch-base # A unique id for the step
+      name: Fetch Base # A title displayed in the frontend
+      action: fetch:cookiecutter # an action to call
+      input: # input that is passed as arguments to the action handler
+        url: ./template
+        values:
+          name: '{{ parameters.name }}'
   owner: backstage/techdocs-core
   type: service
   parameters:
