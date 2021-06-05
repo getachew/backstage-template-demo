@@ -3,23 +3,23 @@ apiVersion: backstage.io/v1beta2
 kind: Template
 # some metadata about the template itself
 metadata:
-  name: e.dev
-  title: e.dev host
-  description: creates an *.e.dev 
+  name: v1beta2-demo
+  title: Test Action template
+  description: scaffolder v1beta2 template demo
 spec:
   owner: backstage/techdocs-core
-  type: Resource
+  type: service
 
   # these are the steps which are rendered in the frontend with the form input
   parameters:
-    - title: Domain Name
+    - title: Fill in some steps
       required:
         - name
       properties:
         name:
           title: Name
           type: string
-          description: a unique name to launch your api => example.ethio.dev
+          description: Unique name of the component
           ui:autofocus: true
           ui:options:
             rows: 5
@@ -31,6 +31,18 @@ spec:
           ui:options:
             allowedKinds:
               - Group
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
   # here's the steps that are executed in series in the scaffolder backend
   steps:
     - id: fetch-base
