@@ -1,7 +1,5 @@
-# Notice the v1beta2 version
 apiVersion: backstage.io/v1beta2
 kind: Template
-# some metadata about the template itself
 metadata:
   name: v1beta2-demo
   title: Test Action template
@@ -10,67 +8,28 @@ spec:
   owner: backstage/techdocs-core
   type: service
   parameters:
-    - title: Fill in some steps
+    - title: A registration form
+      description: A simple form example.
+      type: object
       required:
-        - name
+        - firstName
+        - lastName
       properties:
-        name:
-          title: Name
+        firstName:
           type: string
-          description: Unique name of the component
+          title: First name
+          default: Chuck
           ui:autofocus: true
-          ui:options:
-            rows: 5
-        owner:
-          title: Owner
+          ui:emptyValue: ''
+          ui:autocomplete: family-name
+        lastName:
           type: string
-          description: Owner of the component
-          ui:field: OwnerPicker
-          ui:options:
-            allowedKinds:
-              - Group
-    - title: Choose a location
-      required:
-        - repoUrl
-      properties:
-        repoUrl:
-          title: Repository Location
+          title: Last name
+          ui:emptyValue: ''
+          ui:autocomplete: given-name
+        telephone:
           type: string
-          ui:field: RepoUrlPicker
+          title: Telephone
+          minLength: 10
           ui:options:
-            allowedHosts:
-              - github.com
-  steps:
-    - id: fetch-base
-      name: Fetch Base
-      action: fetch:cookiecutter
-      input:
-        url: ./template
-        values:
-          name: '{{ parameters.name }}'
-          owner: '{{ parameters.owner }}'
-
-    - id: fetch-docs
-      name: Fetch Docs
-      action: fetch:plain
-      input:
-        targetPath: ./community
-        url: https://github.com/backstage/community/tree/main/backstage-community-sessions
-
-    - id: publish
-      name: Publish
-      action: publish:github
-      input:
-        allowedHosts: ['github.com']
-        description: 'This is {{ parameters.name }}'
-        repoUrl: '{{ parameters.repoUrl }}'
-
-    - id: register
-      name: Register
-      action: catalog:register
-      input:
-        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
-        catalogInfoPath: '/catalog-info.yaml'
-  output:
-    remoteUrl: '{{ steps.publish.output.remoteUrl }}'
-    entityRef: '{{ steps.register.output.entityRef }}'
+            inputType: tel
