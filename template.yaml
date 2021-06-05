@@ -3,16 +3,16 @@ apiVersion: backstage.io/v1beta2
 kind: Template
 # some metadata about the template itself
 metadata:
-  name: v1beta2-demo
-  title: Test Action template
-  description: scaffolder v1beta2 template demo
+  name: launch-e.dev
+  title: Launch e.dev
+  description: launches e.dev
 spec:
-  owner: backstage/techdocs-core
+  owner: getachew
   type: Resource
 
   # these are the steps which are rendered in the frontend with the form input
   parameters:
-    - title: Fill in some steps
+    - title: Project Name
       required:
         - name
       properties:
