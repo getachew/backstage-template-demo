@@ -8,7 +8,7 @@ metadata:
   description: launches e.dev
 spec:
   owner: getachew
-  type: Resource
+  type: resource
 
   # these are the steps which are rendered in the frontend with the form input
   parameters:
